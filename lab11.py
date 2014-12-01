@@ -6,7 +6,7 @@ def printInstructions():
   You can choose to move some direction by typing north, south,
   east or west.  
   Type help if you want to see the instructions again.
-  Type exit if you want to leave the game.  Good luck!""")
+  Type quit if you want to leave the game.  Good luck!""")
 
 # Prints a different message depending on the location
 def locationMessage(location):
@@ -32,6 +32,8 @@ def locationMessage(location):
   RyanNJaredsRoomMessage = """You are now in Ryan and Jared's room.  You see Ryan studying for his
   Chemistry test. There is one door on the north wall."""
   
+  NotAllowed = """Sorry, You are not allowed to move in that direction."""
+  
   if location == 'the kitchen':
     printNow(KitchenMessage)
   elif location == 'the masterBedroom':
@@ -42,17 +44,34 @@ def locationMessage(location):
     printNow(LivingRoomMessage)
   elif location == 'Matt & Nick\'s room':
     printNow(MattNNicksRoomMessage)
-  else:
+  elif location == 'Ryan & Jared\'s room':
     printNow(RyanNJaredsRoomMessage)
+  elif location == 'not allowed':
+    printNow(NotAllowed)
+  else:
+    prinNow("Direction Undefined")
     
 # Requests, validates and stores user input regarding next move
 # Possiblemoves = ['north','south','east','west','help','quit']
 def getMove():
-  # I will be adding here
-  return move
+  move = requestString("What direction would you like to go in?\nType help for instructions of quit to exit the game.")  
+  if move == "help":
+    return move
+  elif move == "quit":
+    return move
+  elif move == "north" or move == "n":
+    return move
+  elif move == "south" or move == "s":
+    return move
+  elif move == "east" or move == "e":
+    return move
+  elif move == "west" or move == "w":
+    return move
+  else:
+    return move
   
 def changeLocation(location, move):
-
+    
   return location
 # Prints ending message
 def finishGame(finished):

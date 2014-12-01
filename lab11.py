@@ -54,7 +54,7 @@ def locationMessage(location):
 # Requests, validates and stores user input regarding next move
 # Possiblemoves = ['north','south','east','west','help','quit']
 def getMove():
-  move = requestString("What direction would you like to go in?\nType help for instructions or quit to exit the game.")  
+  move = requestString("What direction would you like to go in?\nType help for instructions of quit to exit the game.")  
   if move == "help":
     return 'help'
   elif move == "quit":
@@ -115,6 +115,10 @@ def playGame():
   location = "the kitchen"
   finished = false
   
+# Lab 11
+# Authors:  Robert Contreras and Julia Diliberto
+# November 30, 2013
+
 # Print game instructions
   printInstructions()
   
@@ -127,10 +131,9 @@ def playGame():
     elif move == 'help':
       printInstructions()
     else:
+      printNow(location)
       location = changeLocation(location,move)
+      printNow(location)
 
 # Print ending message  
   finishGame(finished)
-    
-
-  

@@ -12,7 +12,7 @@ def printInstructions():
   \"east\" or \"west\".  You may type \"pick up\" if you want to pick up
   something in a room. You may type \"count\" to add the occupants 
   of the room to your total count. Type \"help\" if you want to see the 
-  instructions again. Type "exit" if you want to leave the game.  Good luck!""")
+  instructions again. Type "quit" if you want to leave the game.  Good luck!""")
 
 # Prints a different message depending on the location
 def locationMessage(location):
@@ -38,6 +38,8 @@ def locationMessage(location):
   RyanNJaredsRoomMessage = """You are now in Ryan and Jared's room.  You see Ryan studying for his
   Chemistry test. There is one door on the north wall."""
   
+  NotAllowed = """Sorry, You are not allowed to move in that direction."""
+    
   if location == 'the kitchen':
     printNow(KitchenMessage)
   elif location == 'the masterBedroom':
@@ -48,8 +50,12 @@ def locationMessage(location):
     printNow(LivingRoomMessage)
   elif location == 'Matt & Nick\'s room':
     printNow(MattNNicksRoomMessage)
-  else:
+  elif location == 'Ryan & Jared\'s room':
     printNow(RyanNJaredsRoomMessage)
+  elif location == 'not allowed':
+    printNow(NotAllowed)
+  else:
+    printNow("Direction Undefined")
     
 # Changes milkPickedUp or dishesPickedUp if appropriate
 def updatePickedUp(location):
@@ -74,12 +80,54 @@ def updateCount(location):
 # Requests, validates and stores user input regarding next move
 # Possiblemoves = ['north','south','east','west','help','quit']
 def getMove():
-
-  return move
+  move = requestString("What direction would you like to go in?\nType help for instructions of quit to exit the game.")
+  if move == "help":
+    return 'help'
+  elif move == "quit":
+    return 'quit'
+  elif move == "pick up":
+    return 'pick up'
+  elif move == "count":
+    return 'count'
+  elif move == "north" or move == "n":
+    return 'north'
+  elif move == "south" or move == "s":
+    return 'south'
+  elif move == "east" or move == "e":
+    return 'east'
+  elif move == "west" or move == "w":
+    return 'west'
+  else:
+    return 'help'
   
 def changeLocation(location, move):
-
-  return location
+  if location == 'the kitchen' and move == 'west':
+    return 'the masterBedroom'
+  elif location == 'the kitchen' and move == 'south':
+    return 'the dining room'
+  elif location == 'the masterBedroom' and move == 'east':
+    return 'the kitchen'
+  elif location == 'the masterBedroom' and move == 'south':
+    return 'the living room'
+  elif location == 'the dining room' and move == 'north':
+    return 'the kitchen'
+  elif location == 'the dining room' and move == 'west':
+    return 'the living room'
+  elif location == 'the living room' and move == 'north':
+    return 'the masterBedroom'
+  elif location == 'the living room' and move == 'east':
+    return 'the dining room'
+  elif location == 'the living room' and move == 'west':
+    return 'Matt & Nick\'s room'
+  elif location == 'Matt & Nick\'s room' and move == 'east':
+    return 'the living room'
+  elif location == 'Matt & Nick\'s room' and move == 'south':
+    return 'Ryan & Jared\'s room'
+  elif location == 'Ryan & Jared\'s room' and move == 'north':
+    return 'Matt & Nick\'s room'
+  else:
+    locationMessage('not allowed')
+    return location
 # Prints ending message
 def finishGame(finished):
 
@@ -112,7 +160,7 @@ def playGame():
       printInstructions()
     elif move == 'count':
       count = updateCount(location)
-    elif move == 'pick up'
+    elif move == 'pick up':
       if location == 'dining room':
         milkPickedUp = true
       elif location == 'Matt & Nick\'s room':

@@ -1,4 +1,7 @@
-# Prints game instructions
+# Lab 12
+# Authors:  Robert Contreras and Julia Diliberto
+# November 30, 2014
+
 def printInstructions():
   printNow(
   """***Welcome to our home!***
@@ -183,8 +186,10 @@ def playGame():
     elif move == 'pick up':
       if location == 'the dining room':
         milkPickedUp = true
+        printNow ("You've got the milk now!")
       elif location == 'Matt & Nick\'s room':
         dishesPickedUp = true
+        printNow ("Great! You'll need those dishes.")
       else:
         printNow ("There's nothing you need for pancakes in here.")
     elif move == 'open' and location == "the kitchen":

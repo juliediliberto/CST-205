@@ -48,7 +48,7 @@ def locationMessage(location):
 # Requests, validates and stores user input regarding next move
 # Possiblemoves = ['north','south','east','west','help','quit']
 def getMove():
-
+  # I will be adding here
   return move
   
 def changeLocation(location, move):

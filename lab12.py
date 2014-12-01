@@ -164,7 +164,7 @@ def playGame():
       if location == 'the dining room':
         milkPickedUp = true
       elif location == 'Matt & Nick\'s room':
-        dishedPickedUp = true
+        dishesPickedUp = true
       else:
         printNow ("There's nothing you need for pancakes in here.")
     else:

@@ -67,7 +67,7 @@ def updatePickedUp(location):
     printNow ("There's nothing you need for pancakes in here.")
     
 # Updates the count of people in the house
-def updateCount(location):
+def updateCount(location, count):
   if location == 'the living room':
     count = count + 3
   elif location == 'Ryan & Jared\'s room':
@@ -159,9 +159,9 @@ def playGame():
     elif move == 'help':
       printInstructions()
     elif move == 'count':
-      count = updateCount(location)
+      count = updateCount(location, count)
     elif move == 'pick up':
-      if location == 'dining room':
+      if location == 'the dining room':
         milkPickedUp = true
       elif location == 'Matt & Nick\'s room':
         dishedPickedUp = true

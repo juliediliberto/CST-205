@@ -15,15 +15,16 @@ def printInstructions():
   \"east\" or \"west\".  You may type \"pick up\" if you want to pick up
   something in a room. You may type \"count\" to add the occupants 
   of the room to your total count. Type \"help\" if you want to see the 
-  instructions again. Type "quit" if you want to leave the game.  Good luck!""")
+  instructions again. Type "quit" if you want to leave the game. Be careful
+  though.  If you take too long or don't get the count right, you lose. Good luck!""")
 
 # Prints a different message depending on the location
 def locationMessage(location):
 
 # Define location messages
   KitchenMessage = """You are now in the kitchen.  You may exit through a door to the west or to the south.
-  There's a cookie jar and spatula on the counter.  Come back here to make the pancakes once you have the 
-  missing supplies and know how many people are home."""
+  There's a cookie jar and spatula on the counter.  Come back here to make the pancakes 
+  once you have the missing supplies and know how many people are home."""
   
   MasterBedroomMessage = """You are now in the master bedroom.  There's nobody in here.  You may exit
   through the door on the east wall or the door on the south wall."""
@@ -90,10 +91,11 @@ def updateCount(location, count):
   else:
     printNow ("There's nobody in here to count")
   return count
+  
 # Requests, validates and stores user input regarding next move
-# Possiblemoves = ['north','south','east','west','help','quit']
 def getMove():
   move = requestString("What direction would you like to go in?\nType help for instructions of quit to exit the game.")
+  move = move.lower()
   if move == "help":
     return 'help'
   elif move == "quit":
@@ -151,13 +153,19 @@ def changeLocation(location, move, key):
     locationMessage('not allowed')
     return location
 # Prints ending message
-def finishGame(finished):
+def finishGame(finished, count, locationChanges):
 
 # Define ending messages
   QuitMessage = "Tough job, huh? Thanks for trying."
-  WinMessage = "You did it! Now you can make pancakes, unless it's time to take Jared to basketball practice."
+  WinMessage = "You did it! Now you can make pancakes!"
+  WrongCountMessage = "Oops. You must have counted someone twice. You lose."
+  TooSlowMessage = "Oh sorry, that took too long.  It's time to take Jared to basketball practice."
   if finished:
     printNow(QuitMessage)
+  elif count > 7:
+    printNow(WrongCountMessage)
+  elif locationChanges > 12:
+    printNow(TooSlowMessage)
   else:
     printNow(WinMessage)
 
@@ -169,12 +177,13 @@ def playGame():
   dishesPickedUp = false
   milkPickedUp = false
   key = false
+  locationChanges = 0
   
 # Print game instructions
   printInstructions()
   
 # Game play 
-  while not (finished) and  not (location == "the kitchen" and count == 7 and dishesPickedUp and milkPickedUp):
+  while not (finished) and  not (location == "the kitchen" and count > 6 and dishesPickedUp and milkPickedUp):
     locationMessage(location)    
     move = getMove()
     if move == 'quit':
@@ -196,7 +205,8 @@ def playGame():
       printNow ("Great job!  You opened the cookie jar and found the key to the secret pantry!\n  You can now open the door to the north if you like.")
       key = true
     else:
-      location = changeLocation(location,move, key)
+      locationChanges += 1
+      location = changeLocation(location, move, key)
 
 # Print ending message  
-  finishGame(finished)
+  finishGame(finished,count, locationChanges)

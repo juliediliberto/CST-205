@@ -10,15 +10,12 @@ def greenEggsAndHam():
   eggsPath =  'C:\\Users\\GRAM\\Documents\\CST 205\\Lab 14\\fixedeggs.txt'
   eggs = open (eggsPath,"rt")
   eggsString = eggs.read()  
-
-# Replace carriage returns with a space
-  eggsString = eggsString.replace("\n", " ")
   
 # Replace dashes with a space
   eggsString = eggsString.replace("-", " ")
 
 # Split string into a list of words
-  eggsList = eggsString.split(" ")
+  eggsList = eggsString.split()
 
 # Delete ""
 #  eggsList.remove("")

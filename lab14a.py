@@ -44,6 +44,10 @@ def greenEggsAndHam():
 
 # Output most commonly used word
   showInformation(mostUsedWord + " is the most used word in Green Eggs and Ham")
-  
+
 # Output total for each word
-  printNow(counter)
+  printNice(counter)
+
+def printNice( dict ):
+  for key in dict:
+    print key, ' appears ', dict[key], ' times'
